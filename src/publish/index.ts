@@ -138,7 +138,7 @@ export async function publishDDO(config: PublishDDOConfig) {
   const validateResult = await aquarius.validate(ddo)
 
   if (!validateResult.valid)
-    throw new Error(`Validating Metadata failed: ${validateResult?.errors}`)
+    throw new Error(`Validating Metadata failed: ${typeof validateResult?.errors === "string" ? validateResult.errors : JSON.stringify(validateResult?.errors)}`);
 
   // --------------------------------------------------
   // 2. Encrypt DDO
